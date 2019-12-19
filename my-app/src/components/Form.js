@@ -15,7 +15,6 @@ const Forms = ({
         console.log('status has changed', status);
         status && setUsers(users => [...users, status]);
     }, [status]);
-    console.log(users.role);
     return (
         <div className="user-form">
             <Form>
@@ -115,7 +114,7 @@ const FormikForms = withFormik ({
      axios
      .post("https://reqres.in/api/users", values)
      .then(res => {
-         console.log("succes", res);
+         console.log("success", res);
          setStatus(res.data);
          resetForm();
      })
