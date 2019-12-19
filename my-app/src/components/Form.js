@@ -15,7 +15,7 @@ const Forms = ({
         console.log('status has changed', status);
         status && setUsers(users => [...users, status]);
     }, [status]);
-    
+    console.log(users.role);
     return (
         <div className="user-form">
             <Form>
@@ -59,6 +59,16 @@ const Forms = ({
                 />
                 <span className="checkbox" />
                 </label>
+                <Field className="role" as="select" name="role">
+                    <option disabled>
+                        Choose a role:
+                    </option>
+                    <option value="Web Developer">Web Developer</option>
+                    <option value="Senior Web Developer">Senior Web Developer</option>
+                    <option value="Front End Developer">Front End Developer</option>
+                    <option value="Full Stack Web Developer">Full Stack Web Developer</option>
+                    <option value="Web User Interface Design">Web User Interface Design</option>
+                </Field>
                 <button type="submit">
                     Enter
                 </button>
@@ -66,6 +76,7 @@ const Forms = ({
             {users.map(user => (
                 <ul key ={user.id}>
                     <li>Name: {user.name}</li>
+                    <li>Role: {user.role}</li>
                     <li>Email: {user.email}</li>
                     <li>Password: *******</li>
                 </ul>
@@ -79,13 +90,15 @@ const FormikForms = withFormik ({
         name,
         email,
         password,
-        terms
+        terms,
+        role
     }) {
         return {
             name: name || "",
             email: email || "",
             password: password || "",
-            terms: terms || false
+            terms: terms || false,
+            role: role || "Web Developer"
         };
     },
     validationSchema: Yup.object().shape({
